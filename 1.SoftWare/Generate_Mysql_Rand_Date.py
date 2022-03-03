@@ -2,7 +2,7 @@ import time,datetime,random,pymysql
 
 class Mysql_Class():
     def __init__(self):
-        self.conn = pymysql.connect(host='175.178.128.27',user ='monitor',passwd='monitor',port= 3306,db='monitor',charset='utf8')
+        self.conn = pymysql.connect(host='*.*.*.*',user ='monitor',passwd='monitor',port= 3306,db='monitor',charset='utf8')
         self.cursor=self.conn.cursor()
     def GenerateRandomData(self,Data):
         sql = "INSERT INTO `monitor`.`monitor` (`Data`, `SoilTemp`, `SoilHum`, `AirTemp`, `AirHum`, `illu`, `worm`, `ph`, `ID`) VALUES ('{}',' {:.2f}', '{:.2f}', '{:.2f}', '{:.2f}','{}', '{}', '{:.2f}', NULL);".format(Data, random.uniform(12.0,25.0),random.uniform(30.0,40.0), random.uniform(12.0,25.0), random.uniform(30.0,80.0), random.randint(10,70),random.randint(0,1), random.uniform(6.5,8.0))

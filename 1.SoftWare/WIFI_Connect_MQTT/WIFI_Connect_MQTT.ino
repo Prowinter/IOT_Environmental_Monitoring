@@ -5,7 +5,7 @@
 WiFiManager wifiManager;
 
 // MQTT Broker
-const char *mqtt_broker = "175.178.128.27";
+const char *mqtt_broker = "*.*.*.*";
 const char *topic = "testtopic/test";
 const char *mqtt_username = "emqx";
 const char *mqtt_password = "public";
