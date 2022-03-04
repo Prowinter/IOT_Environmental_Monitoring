@@ -71,6 +71,27 @@ GROUP BY DATE_FORMAT(#时间字段,'%Y-%m-%d')
 
 <br/>
 
+## QT X轴转时间轴
+
+```
+ui->myCustomPlot->graph(0)->rescaleAxes();//自动缩放
+ui->myCustomPlot->graph(0)->rescaleKeyAxis();//自动缩放键的范围
+ui->myCustomPlot->graph(0)->rescaleValueAxis();//自动缩放值的范围
+ui->myCustomPlot->replot(); //重绘数据
+```
+
+## 时间轴作X轴
+
+> X轴的数据以1970-01-01 00:00:00至当前时间的总秒数，若某个点的X值=5，则该点在图中的X坐标会显示为1970-01-01 00:00:05。最后需要缩放下X轴的显示。
+
+```
+QSharedPointer<QCPAxisTickerDateTime> dateTicker(new QCPAxisTickerDateTime);//日期做X轴
+dateTicker->setDateTimeFormat("yyyy-MM-dd hh:mm:ss");//日期格式
+dateTicker->setTickCount(5);//X轴标签个数
+```
+<div align=center><img src="3.Doc/images/Windows.png" width="70%" height="70%"/></div>
+
+
 ## 拓展
 
 >[IoTManager](https://iotmanager.ru/)
