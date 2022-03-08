@@ -71,6 +71,24 @@ GROUP BY DATE_FORMAT(#时间字段,'%Y-%m-%d')
 
 <br/>
 
+## Mysql-DATE_FORMAT常用转换
+|  格式   | 描述  |
+|  ----  | ----  |
+|%Y|年，4 位|
+|%y|年，2 位|
+|%M|月名|
+|%m|月，数值(00-12)|
+|%d|月的天，数值(00-31)|
+|%e|月的天，数值(0-31)|
+|%r|时间，12-小时（hh:mm:ss AM 或 PM）|
+|%H|小时 (00-23)|
+|%h|小时 (01-12)|
+|%i|分钟，数值(00-59)|
+|%S|秒(00-59)|
+|%s|秒(00-59)|
+
+<br/>
+
 ## QT X轴转时间轴
 
 ```
@@ -79,7 +97,7 @@ ui->myCustomPlot->graph(0)->rescaleKeyAxis();//自动缩放键的范围
 ui->myCustomPlot->graph(0)->rescaleValueAxis();//自动缩放值的范围
 ui->myCustomPlot->replot(); //重绘数据
 ```
-
+<br/>
 ## 时间轴作X轴
 
 > X轴的数据以1970-01-01 00:00:00至当前时间的总秒数，若某个点的X值=5，则该点在图中的X坐标会显示为1970-01-01 00:00:05。最后需要缩放下X轴的显示。
@@ -91,6 +109,7 @@ dateTicker->setTickCount(5);//X轴标签个数
 ```
 <div align=center><img src="3.Doc/images/Windows.png" width="70%" height="70%"/></div>
 
+<br/>
 
 ## 拓展
 

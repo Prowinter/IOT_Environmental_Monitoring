@@ -30,7 +30,7 @@ def Generate_Date(start,end,interval_min=5,frmt="%Y-%m-%d %H:%M:%S"):
     return time_time
 
 #generate_time = Generate_Date("2022-2-1 0:0:0","2022-3-1 0:0:0")
-generate_time = Generate_Date("2022-2-1 0:0:0","2022-3-1 0:0:0")
+generate_time = Generate_Date("2022-2-1 0:0:0","2022-3-8 0:5:0")
 mysql_mysql = Mysql_Class()
 for g_time in generate_time:
     mysql_mysql.GenerateRandomData(g_time)
