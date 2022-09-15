@@ -69,11 +69,11 @@ void SystemClock_Config(void);
 #endif
 PUTCHAR_PROTOTYPE
 {
-    // HAL¿âº¯Êý°æ±¾
+    // HALåº“å‡½æ•°ç‰ˆæœ¬
     // HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1 , 0xffff);
     // return ch;
 
-    // ¼Ä´æÆ÷°æ±¾
+    // å¯„å­˜å™¨ç‰ˆæœ¬
     while ((USART2->SR & 0X40) == 0);
     USART2->DR = (uint8_t) ch;
     return ch;
@@ -116,7 +116,7 @@ int main(void)
   MX_TIM2_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-	HAL_ADCEx_Calibration_Start(&hadc1);    //ADÐ£×¼
+	HAL_ADCEx_Calibration_Start(&hadc1);    //ADæ ¡å‡†
 	HAL_TIM_Base_Start_IT(&htim1);
 	HAL_UART_Receive_IT(&huart1, (uint8_t *)PH_RX_BUF, 1);
   /* USER CODE END 2 */
@@ -128,16 +128,16 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		// ÎÂÊª¶ÈÊý¾Ý»ñÈ¡
+		// æ¸©æ¹¿åº¦æ•°æ®èŽ·å–
 		Read_DHT11(&monitor);
 		
 		HAL_ADC_Start(&hadc1);
-		HAL_ADC_PollForConversion(&hadc1,50);//µÈ´ýADC×ª»»Íê³É
+		HAL_ADC_PollForConversion(&hadc1,50);//ç­‰å¾…ADCè½¬æ¢å®Œæˆ
 		monitor.Illumination = HAL_ADC_GetValue(&hadc1)*100/4096;
 
 		
 		HAL_ADC_Start(&hadc1);
-		HAL_ADC_PollForConversion(&hadc1,50);//µÈ´ýADC×ª»»Íê³É
+		HAL_ADC_PollForConversion(&hadc1,50);//ç­‰å¾…ADCè½¬æ¢å®Œæˆ
 		soil_humi = HAL_ADC_GetValue(&hadc1)*3.3f/4096;
 		HAL_ADC_Stop(&hadc1);
 		
@@ -148,8 +148,8 @@ int main(void)
 		{
 			
 			soil_temp = DS18B20_GetTemperature();
-			monitor.soiltemp_int = soil_temp>>4 ;          /*ºÏ³ÉÊµ¼ÊÎÂ¶ÈÕûÊý²¿·Ö****¾«¶ÈÏà¶ÔÉÏÃæµÄ¸ü¸ß*/ 
-			monitor.soiltemp_deci = soil_temp&0xF ;         /*ºÏ³ÉÊµ¼ÊÎÂ¶ÈÐ¡Êý²¿·Ö*/
+			monitor.soiltemp_int = soil_temp>>4 ;          /*åˆæˆå®žé™…æ¸©åº¦æ•´æ•°éƒ¨åˆ†****ç²¾åº¦ç›¸å¯¹ä¸Šé¢çš„æ›´é«˜*/ 
+			monitor.soiltemp_deci = soil_temp&0xF ;         /*åˆæˆå®žé™…æ¸©åº¦å°æ•°éƒ¨åˆ†*/
 		}
 		
 		if(PH_RX_STA ==  0x0007)
@@ -226,23 +226,23 @@ void float_to_int_deci(Monitor_Data_TypeDef *monitor,float soil_humi)
 
 
 /*
- * Ò»´ÎÍêÕûµÄÊý¾Ý´«ÊäÎª40bit£¬¸ßÎ»ÏÈ³ö
- * 8bit Êª¶ÈÕûÊý + 8bit Êª¶ÈÐ¡Êý + 8bit ÎÂ¶ÈÕûÊý + 8bit ÎÂ¶ÈÐ¡Êý + 8bit Ð£ÑéºÍ 
+ * ä¸€æ¬¡å®Œæ•´çš„æ•°æ®ä¼ è¾“ä¸º40bitï¼Œé«˜ä½å…ˆå‡º
+ * 8bit æ¹¿åº¦æ•´æ•° + 8bit æ¹¿åº¦å°æ•° + 8bit æ¸©åº¦æ•´æ•° + 8bit æ¸©åº¦å°æ•° + 8bit æ ¡éªŒå’Œ 
  */
 uint8_t Read_DHT11(Monitor_Data_TypeDef *monitor)
 {  
 	DHT11_Start();
 	DAT_IN();
 
-	/*ÅÐ¶Ï´Ó»úÊÇ·ñÓÐµÍµçÆ½ÏìÓ¦ÐÅºÅ Èç²»ÏìÓ¦ÔòÌø³ö£¬ÏìÓ¦ÔòÏòÏÂÔËÐÐ*/   
+	/*åˆ¤æ–­ä»Žæœºæ˜¯å¦æœ‰ä½Žç”µå¹³å“åº”ä¿¡å· å¦‚ä¸å“åº”åˆ™è·³å‡ºï¼Œå“åº”åˆ™å‘ä¸‹è¿è¡Œ*/   
 	if(HAL_GPIO_ReadPin(DHT11_GPIO_Port, DHT11_DAT_GPIO_Pin) == 0)     
 	{
-		/*ÂÖÑ¯Ö±µ½´Ó»ú·¢³ö µÄ50us µÍµçÆ½ ÏìÓ¦ÐÅºÅ½áÊø*/  
+		/*è½®è¯¢ç›´åˆ°ä»Žæœºå‘å‡º çš„50us ä½Žç”µå¹³ å“åº”ä¿¡å·ç»“æŸ*/  
 		while(HAL_GPIO_ReadPin(DHT11_GPIO_Port, DHT11_DAT_GPIO_Pin)==0);
 
-		/*ÂÖÑ¯Ö±µ½´Ó»ú·¢³öµÄ 30us ¸ßµçÆ½ ±êÖÃÐÅºÅ½áÊø*/
+		/*è½®è¯¢ç›´åˆ°ä»Žæœºå‘å‡ºçš„ 30us é«˜ç”µå¹³ æ ‡ç½®ä¿¡å·ç»“æŸ*/
 		while(HAL_GPIO_ReadPin(DHT11_GPIO_Port, DHT11_DAT_GPIO_Pin)==1);
-		/*¿ªÊ¼½ÓÊÕÊý¾Ý*/   
+		/*å¼€å§‹æŽ¥æ”¶æ•°æ®*/   
 		monitor->air_humi_int= Read_Byte();
 
 		monitor->air_humi_deci= Read_Byte();
@@ -254,12 +254,12 @@ uint8_t Read_DHT11(Monitor_Data_TypeDef *monitor)
 		monitor->air_check_sum= Read_Byte();
 
 
-		/*¶ÁÈ¡½áÊø£¬Òý½Å¸ÄÎªÊä³öÄ£Ê½*/
+		/*è¯»å–ç»“æŸï¼Œå¼•è„šæ”¹ä¸ºè¾“å‡ºæ¨¡å¼*/
 		DAT_OUT();
-		/*Ö÷»úÀ­¸ß*/
+		/*ä¸»æœºæ‹‰é«˜*/
 		HAL_GPIO_WritePin(DHT11_GPIO_Port, DHT11_DAT_GPIO_Pin, GPIO_PIN_SET);	
 
-		/*¼ì²é¶ÁÈ¡µÄÊý¾ÝÊÇ·ñÕýÈ·*/
+		/*æ£€æŸ¥è¯»å–çš„æ•°æ®æ˜¯å¦æ­£ç¡®*/
 		if(monitor->air_check_sum == monitor->air_humi_int + monitor->air_humi_deci + monitor->air_temp_int+ monitor->air_temp_deci)
 			return SUCCESS;
 		else 

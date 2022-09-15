@@ -26,7 +26,7 @@ public:
     ~MainWindow();
     QSqlDatabase dbconn;
     int port = 3306;                        // 端口
-    QString hostName = "*.*.*.*";    // 主机名
+    QString hostName = "175.178.128.27";    // 主机名
     QString dbName = "monitor";             // 数据库名称
     QString userName = "monitor";           // 用户名
     QString password = "monitor";           // 密码

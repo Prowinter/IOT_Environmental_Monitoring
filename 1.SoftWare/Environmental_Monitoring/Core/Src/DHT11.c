@@ -2,7 +2,7 @@
 
 void delay_us(unsigned short int nus)
 {
-		__HAL_TIM_SetCounter(&DLY_TIM_Handle,0);
+	__HAL_TIM_SetCounter(&DLY_TIM_Handle,0);
     HAL_TIM_Base_Start(&DLY_TIM_Handle);
     while(__HAL_TIM_GetCounter(&DLY_TIM_Handle)<nus);
     HAL_TIM_Base_Stop(&DLY_TIM_Handle);
@@ -10,16 +10,16 @@ void delay_us(unsigned short int nus)
 
 void DHT11_Start()	   
 {              
-		DAT_OUT(); 		//配置io口为输出模式
+	DAT_OUT(); 		//配置io口为输出模式
     HAL_GPIO_WritePin(DHT11_GPIO_Port, DHT11_DAT_GPIO_Pin, GPIO_PIN_RESET);	
     HAL_Delay(30);    		//拉低至少18ms
     HAL_GPIO_WritePin(DHT11_GPIO_Port, DHT11_DAT_GPIO_Pin, GPIO_PIN_SET);	
-		delay_us(30);					//延时30us
+	delay_us(30);					//延时30us
 }
 
 void DHT11_Stop()	   
 {              
-		DAT_OUT(); 		//配置io口为输出模式
+	DAT_OUT(); 		//配置io口为输出模式
     HAL_GPIO_WritePin(DHT11_GPIO_Port, DHT11_DAT_GPIO_Pin, GPIO_PIN_SET);	
 }
 

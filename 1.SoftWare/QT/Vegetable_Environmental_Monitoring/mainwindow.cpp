@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     //设置画笔
     ui->myCustomPlot->graph(0)->setPen(QPen(Qt::blue));
     ui->myCustomPlot->yAxis->setRange(6.0,8.0);
+    
     ui->label->setStyleSheet("color:red;");
     ui->label_3->setStyleSheet("color:red;");
     ui->label_4->setStyleSheet("color:red;");
@@ -51,7 +52,7 @@ MainWindow::~MainWindow()
 void MainWindow::Update_data()
 {
     qDebug() << "Timer";
-    QString sql = "SELECT DATE_FORMAT(Data,'%Y-%m-%e %H:%i:%s') AS 'Data', ROUND(SoilTemp,2) AS 'SoilTemp',ROUND(SoilHum,2) AS 'SoilHum',ROUND(AirTemp,2) AS 'AirTemp',ROUND(AirHum,2) AS 'AirHum',ROUND(illu,2) AS 'illu',ROUND(worm,2) AS 'worm',ROUND(ph,2) AS 'ph' FROM `monitor` WHERE DATE_SUB(CURDATE(), INTERVAL 30 DAY) <= date(Data) order by Data DESC limit 1";
+    QString sql = "SELECT DATE_FORMAT(Data,'%Y-%m-%d %H:%i:%s') AS 'Data', ROUND(SoilTemp,2) AS 'SoilTemp',ROUND(SoilHum,2) AS 'SoilHum',ROUND(AirTemp,2) AS 'AirTemp',ROUND(AirHum,2) AS 'AirHum',ROUND(illu,2) AS 'illu',ROUND(worm,2) AS 'worm',ROUND(ph,2) AS 'ph' FROM `monitor` WHERE DATE_SUB(CURDATE(), INTERVAL 30 DAY) <= date(Data) order by Data DESC limit 1";
     if (dbconn.open()) {
         QSqlQuery query;//用于执行SQL语言
         query.exec(sql);
